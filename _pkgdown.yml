@@ -1,0 +1,33 @@
+template:
+  bootstrap: 5
+
+llm-docs: false
+url: https://example.org/omia
+
+reference:
+  - title: Data preparation
+    contents:
+      - prep_incidence_data
+  - title: Estimation and simulation
+    contents:
+      - estimate_rt_epiestim
+      - renewal_expected_incidence
+      - simulate_poisson_process
+      - fit_poisson_growth
+      - compare_incidence_models
+  - title: Visualization
+    contents:
+      - plot_epicurve
+      - plot_rt_estimates
+  - title: Reporting
+    contents:
+      - outbreak_consensus_summary
+  - title: Data
+    contents:
+      - cat_ba_week1
+
+articles:
+  - title: Analyses
+    navbar: Analyses
+    contents:
+      - cat-ba-week1-analysis

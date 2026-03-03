@@ -1,0 +1,14 @@
+^.*[.]Rproj$
+^[.]Rproj[.]user$
+^data-raw$
+^data-raw/
+^[.]github$
+^[.]github/
+^[.]gitignore$
+^[.]Rcheck$
+^[.]Rcheck/
+^[.][.][Rr]check$
+^[.][.][Rr]check/
+^CODEX_TEST[.]txt$
+^pkgdown$
+^pkgdown/

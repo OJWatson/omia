@@ -1,0 +1,27 @@
+Package: omia
+Title: Epidemiological and Statistical Workflows for Outbreak Analysis
+Version: 0.1.0
+Author: Kana Contributor [aut, cre]
+Maintainer: Kana Contributor <kana@example.com>
+Authors@R: 
+    person(given = "Kana",
+           family = "Contributor",
+           role = c("aut", "cre"),
+           email = "kana@example.com")
+Description: Tools for preparing incidence data, estimating time-varying
+    reproduction numbers, fitting growth models, comparing incidence models,
+    simulation, and producing publication-ready outbreak summaries and plots.
+License: MIT + file LICENSE
+URL: https://example.org/omia
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Depends: R (>= 4.1.0)
+Imports: dplyr, tibble, ggplot2, stats, rlang, tidyr, purrr
+Suggests: testthat (>= 3.0.0), knitr, rmarkdown, pkgdown, EpiEstim,
+        EpiNow2, loo
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+LazyData: true
+NeedsCompilation: no
+Packaged: 2026-03-03 09:51:09 UTC; kana

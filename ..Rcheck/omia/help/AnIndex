@@ -1,0 +1,12 @@
+omia-package	omia
+cat_ba_week1	cat_ba_week1
+compare_incidence_models	compare_incidence_models
+estimate_rt_epiestim	estimate_rt_epiestim
+fit_poisson_growth	fit_poisson_growth
+omia	omia
+outbreak_consensus_summary	outbreak_consensus_summary
+plot_epicurve	plot_epicurve
+plot_rt_estimates	plot_rt_estimates
+prep_incidence_data	prep_incidence_data
+renewal_expected_incidence	renewal_expected_incidence
+simulate_poisson_process	simulate_poisson_process
