@@ -10,7 +10,7 @@ jobs:
   R-CMD-check:
     runs-on: ubuntu-latest
     env:
-      _R_CHECK_FORCE_SUGGESTS_: false
+      _R_CHECK_FORCE_SUGGESTS_: true
 
     steps:
       - uses: actions/checkout@v4

@@ -7,6 +7,9 @@
 - renewal-equation expected incidence calculations
 - Poisson process simulation
 - Poisson growth model fitting with doubling time
+- uncertainty-propagating short-term forecasts from growth models
+- rolling-origin forecast evaluation (MAE/RMSE/coverage/WIS/CRPS)
+- epichains-based branching-process simulation for chain-aware uncertainty
 - model comparison using AIC/BIC (and optional LOOIC)
 - epidemic and Rt visualization
 - outbreak consensus summaries

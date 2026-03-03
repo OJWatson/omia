@@ -4,7 +4,14 @@
 \alias{fit_poisson_growth}
 \title{Fit a log-linear Poisson growth model}
 \usage{
-fit_poisson_growth(data, date_col = "date", count_col = "incidence")
+fit_poisson_growth(
+  data,
+  date_col = "date",
+  count_col = "incidence",
+  n_draws = 0L,
+  mean_si = 4.7,
+  seed = NULL
+)
 }
 \arguments{
 \item{data}{A data frame with date and incidence columns.}
@@ -12,10 +19,18 @@ fit_poisson_growth(data, date_col = "date", count_col = "incidence")
 \item{date_col}{Name of date column.}
 
 \item{count_col}{Name of incidence/count column.}
+
+\item{n_draws}{Number of uncertainty draws from the asymptotic Normal
+distribution of the growth coefficient. Set to \code{0} to skip.}
+
+\item{mean_si}{Mean serial interval used to map growth-rate draws to
+implied \code{R_t} draws via \code{exp(growth_rate * mean_si)}.}
+
+\item{seed}{Optional random seed used when \code{n_draws > 0}.}
 }
 \value{
-A list with model object, coefficient summary tibble, and fitted
-values tibble.
+A list with model object, coefficient summary tibble, fitted values,
+and (optionally) growth-rate uncertainty draws.
 }
 \description{
 Fits a Poisson regression of incidence on time and reports growth rate,

@@ -10,6 +10,13 @@ The \code{omia} package provides practical tools for incidence data preparation,
 time-varying reproduction number estimation, growth model fitting,
 model comparison, simulation, and reporting.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/OJWatson/omia}
+}
+
+}
 \author{
 \strong{Maintainer}: Kana Contributor \email{kana@example.com}
 

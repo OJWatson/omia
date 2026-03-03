@@ -2,26 +2,38 @@ template:
   bootstrap: 5
 
 llm-docs: false
-url: https://example.org/omia
+url: https://ojwatson.github.io/omia/
 
 reference:
   - title: Data preparation
     contents:
       - prep_incidence_data
+
   - title: Estimation and simulation
     contents:
       - estimate_rt_epiestim
       - renewal_expected_incidence
       - simulate_poisson_process
       - fit_poisson_growth
+      - forecast_poisson_growth
+      - evaluate_rolling_origin_forecast
+      - simulate_epichains_paths
+      - simulate_renewal_forecast
+      - simulate_epichains_forecast
+      - summarise_forecast_uncertainty
+      - score_forecast_draws
+      - rolling_origin_evaluate
       - compare_incidence_models
+
   - title: Visualization
     contents:
       - plot_epicurve
       - plot_rt_estimates
+
   - title: Reporting
     contents:
       - outbreak_consensus_summary
+
   - title: Data
     contents:
       - cat_ba_week1

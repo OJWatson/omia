@@ -1,6 +1,6 @@
 Package: omia
 Title: Epidemiological and Statistical Workflows for Outbreak Analysis
-Version: 0.1.0
+Version: 0.2.0
 Author: Kana Contributor [aut, cre]
 Maintainer: Kana Contributor <kana@example.com>
 Authors@R: 
@@ -10,9 +10,10 @@ Authors@R:
            email = "kana@example.com")
 Description: Tools for preparing incidence data, estimating time-varying
     reproduction numbers, fitting growth models, comparing incidence models,
-    simulation, and producing publication-ready outbreak summaries and plots.
+    uncertainty-aware simulation/forecasting, and reproducible forecast
+    evaluation.
 License: MIT + file LICENSE
-URL: https://example.org/omia
+URL: https://github.com/OJWatson/omia, https://ojwatson.github.io/omia
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
@@ -25,15 +26,30 @@ Imports:
     stats,
     rlang,
     tidyr,
-    purrr
+    purrr,
+    epichains
 Suggests:
     testthat (>= 3.0.0),
     knitr,
     rmarkdown,
     pkgdown,
     EpiEstim,
-    EpiNow2,
     loo
 Config/testthat/edition: 3
+Config/Needs/check:
+    EpiEstim,
+    epichains,
+    knitr,
+    loo,
+    pkgdown,
+    rmarkdown,
+    testthat
+Config/Needs/website:
+    EpiEstim,
+    epichains,
+    knitr,
+    loo,
+    pkgdown,
+    rmarkdown
 VignetteBuilder: knitr
 LazyData: true
