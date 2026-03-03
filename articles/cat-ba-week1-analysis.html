@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Cat BA Week 1 Analysis • omia</title>
+<title>Advanced count time-series uncertainty and forecast evaluation • omia</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Cat BA Week 1 Analysis">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Advanced count time-series uncertainty and forecast evaluation">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">omia</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Analyses</h6></li>
-    <li><a class="dropdown-item" href="../articles/cat-ba-week1-analysis.html">Cat BA Week 1 Analysis</a></li>
+    <li><a class="dropdown-item" href="../articles/cat-ba-week1-analysis.html">Advanced count time-series uncertainty and forecast evaluation</a></li>
   </ul>
 </li>
       </ul>
@@ -43,6 +43,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/OJWatson/omia/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -56,17 +57,17 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Cat BA Week 1 Analysis</h1>
+      <h1>Advanced count time-series uncertainty and forecast evaluation</h1>
             
       
-
+      <small class="dont-index">Source: <a href="https://github.com/OJWatson/omia/blob/main/vignettes/cat-ba-week1-analysis.Rmd" class="external-link"><code>vignettes/cat-ba-week1-analysis.Rmd</code></a></small>
       <div class="d-none name"><code>cat-ba-week1-analysis.Rmd</code></div>
     </div>
 
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://example.org/omia">omia</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/OJWatson/omia" class="external-link">omia</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
@@ -76,22 +77,23 @@
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
-<h2 id="objective">Objective<a class="anchor" aria-label="anchor" href="#objective"></a>
+<h2 id="scope">Scope<a class="anchor" aria-label="anchor" href="#scope"></a>
 </h2>
-<p>This vignette demonstrates a practical outbreak workflow using the
-included <code>cat_ba_week1</code> dataset. The goal is to combine
-complementary evidence sources:</p>
+<p>This vignette demonstrates a reproducible <strong>count
+time-series</strong> workflow with explicit uncertainty handling and
+out-of-sample evaluation. The emphasis is on methodology:</p>
 <ol style="list-style-type: decimal">
-<li>incidence preprocessing and visualization,</li>
-<li>growth-rate inference from a Poisson model,</li>
-<li>renewal-equation expected incidence,</li>
-<li>simulation for uncertainty intuition,</li>
-<li>optional Rt estimation (when <code>EpiEstim</code> is available),
-and</li>
-<li>model comparison + consensus summary.</li>
+<li>uncertainty estimation at each modeling stage,</li>
+<li>uncertainty propagation into predictive distributions,</li>
+<li>interpretation of predictive intervals,</li>
+<li>rolling-origin backtesting, and</li>
+<li>forecast scoring (MAE, RMSE, interval coverage, WIS, CRPS).</li>
 </ol>
+<p>It also includes a chain-based simulation comparison using
+<code>epichains</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="data-and-preprocessing">Data and preprocessing<a class="anchor" aria-label="anchor" href="#data-and-preprocessing"></a>
@@ -114,196 +116,319 @@ and</li>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2024-01-09         3</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2024-01-10         2</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more rows</span></span></span></code></pre></div>
-<p><code><a href="../reference/prep_incidence_data.html">prep_incidence_data()</a></code> standardizes date/count columns,
-aggregates duplicate dates, and fills missing dates. This creates a
-consistent daily time series for downstream tools.</p>
-</div>
-<div class="section level2">
-<h2 id="epidemic-curve">Epidemic curve<a class="anchor" aria-label="anchor" href="#epidemic-curve"></a>
-</h2>
+<p><code><a href="../reference/prep_incidence_data.html">prep_incidence_data()</a></code> enforces a regular daily index and
+non-negative counts, which is essential for coherent rolling-origin
+resampling and renewal calculations.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_epicurve.html">plot_epicurve</a></span><span class="op">(</span><span class="va">inc</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cat-ba-week1-analysis_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="" width="672"></p>
-<p>Visual inspection suggests an upward trajectory with increasing
-variance, which is consistent with count-process dynamics and motivates
-Poisson-family models.</p>
 </div>
 <div class="section level2">
-<h2 id="growth-model-poisson-log-linear">Growth model (Poisson log-linear)<a class="anchor" aria-label="anchor" href="#growth-model-poisson-log-linear"></a>
+<h2 id="stage-1-growth-model-parameter-uncertainty">Stage 1: growth model + parameter uncertainty<a class="anchor" aria-label="anchor" href="#stage-1-growth-model-parameter-uncertainty"></a>
 </h2>
-<p>We fit a Poisson model with a log link:</p>
+<p>We fit a Poisson log-linear trend model:</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mi>E</mi><mrow><mo stretchy="true" form="prefix">[</mo><msub><mi>I</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><msub><mi>β</mi><mn>0</mn></msub><mo>+</mo><msub><mi>β</mi><mn>1</mn></msub><mi>t</mi></mrow><annotation encoding="application/x-tex">
 \log E[I_t] = \beta_0 + \beta_1 t
 </annotation></semantics></math></p>
-<p>where <code>\beta_1</code> is the daily growth rate. The implied
-doubling time is <code>log(2) / beta1</code>.</p>
+<p>with uncertainty in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>β</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\beta_1</annotation></semantics></math>
+approximated by the model covariance matrix. From
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>β</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\beta_1</annotation></semantics></math>,
+we derive doubling time and an implied reproduction scale via
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>exp</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>β</mi><mn>1</mn></msub><mo>×</mo><mover><mi>s</mi><mo accent="true">‾</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\exp(\beta_1 \times \bar{s})</annotation></semantics></math>,
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>s</mi><mo accent="true">‾</mo></mover><annotation encoding="application/x-tex">\bar{s}</annotation></semantics></math>
+is mean serial interval.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">growth</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_poisson_growth.html">fit_poisson_growth</a></span><span class="op">(</span><span class="va">inc</span><span class="op">)</span></span>
-<span><span class="va">growth</span><span class="op">$</span><span class="va">estimates</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 6</span></span></span>
-<span><span class="co">#&gt;   term  growth_rate std_error conf_low conf_high doubling_time</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> day         0.109    0.019<span style="text-decoration: underline;">6</span>   0.070<span style="text-decoration: underline;">9</span>     0.148          6.34</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">growth</span><span class="op">$</span><span class="va">fitted</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">incidence</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"grey80"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">fitted</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"#1f77b4"</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"Observed incidence vs Poisson growth fit"</span>,</span>
-<span>    x <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>    y <span class="op">=</span> <span class="st">"Daily cases"</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="cat-ba-week1-analysis_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="" width="672"></p>
-</div>
-<div class="section level2">
-<h2 id="renewal-equation-expected-incidence">Renewal-equation expected incidence<a class="anchor" aria-label="anchor" href="#renewal-equation-expected-incidence"></a>
-</h2>
-<p>Given a serial interval distribution <code>w_s</code> and Rt,
-expected incidence is computed as:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mrow><mo stretchy="true" form="prefix">[</mo><msub><mi>I</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><msub><mi>R</mi><mi>t</mi></msub><munderover><mo>∑</mo><mrow><mi>s</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></munderover><msub><mi>I</mi><mrow><mi>t</mi><mo>−</mo><mi>s</mi></mrow></msub><msub><mi>w</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">
-E[I_t] = R_t \sum_{s=1}^{t-1} I_{t-s} w_s
-</annotation></semantics></math></p>
-<p>For illustration, use a fixed <code>Rt = 1.2</code> and a short
-serial interval vector.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">si</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.25</span>, <span class="fl">0.15</span><span class="op">)</span></span>
-<span><span class="va">renewal_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/renewal_expected_incidence.html">renewal_expected_incidence</a></span><span class="op">(</span></span>
-<span>  incidence <span class="op">=</span> <span class="va">inc</span><span class="op">$</span><span class="va">incidence</span>,</span>
-<span>  rt <span class="op">=</span> <span class="fl">1.2</span>,</span>
-<span>  serial_interval <span class="op">=</span> <span class="va">si</span></span>
-<span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">renewal_tbl</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
-<span><span class="co">#&gt;     day infectiousness    rt expected_incidence</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1           0      1.2               0   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2           0.1    1.2               0.12</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3           0.2    1.2               0.24</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4           0.4    1.2               0.48</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     5           0.85   1.2               1.02</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     6           1.35   1.2               1.62</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="poisson-process-simulation">Poisson-process simulation<a class="anchor" aria-label="anchor" href="#poisson-process-simulation"></a>
-</h2>
-<p>Simulation helps communicate plausible day-to-day variation around
-expected counts.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sims</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simulate_poisson_process.html">simulate_poisson_process</a></span><span class="op">(</span></span>
-<span>  expected_incidence <span class="op">=</span> <span class="va">renewal_tbl</span><span class="op">$</span><span class="va">expected_incidence</span>,</span>
-<span>  n_sims <span class="op">=</span> <span class="fl">100</span>,</span>
+<code class="sourceCode R"><span><span class="va">growth</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_poisson_growth.html">fit_poisson_growth</a></span><span class="op">(</span></span>
+<span>  <span class="va">inc</span>,</span>
+<span>  n_draws <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  mean_si <span class="op">=</span> <span class="fl">4.7</span>,</span>
 <span>  seed <span class="op">=</span> <span class="fl">42</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">sim_summary</span> <span class="op">&lt;-</span> <span class="va">sims</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">day</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="va">growth</span><span class="op">$</span><span class="va">estimates</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span></span>
+<span><span class="co">#&gt;   term  growth_rate std_error conf_low conf_high doubling_time implied_rt</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> day         0.109    0.019<span style="text-decoration: underline;">6</span>   0.070<span style="text-decoration: underline;">9</span>     0.148          6.34       1.67</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">growth_uncertainty</span> <span class="op">&lt;-</span> <span class="va">growth</span><span class="op">$</span><span class="va">uncertainty_draws</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
-<span>    mean_sim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">incidence</span><span class="op">)</span>,</span>
-<span>    q05 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">incidence</span>, <span class="fl">0.05</span><span class="op">)</span>,</span>
-<span>    q95 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">incidence</span>, <span class="fl">0.95</span><span class="op">)</span>,</span>
+<span>    rt_median <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">implied_rt</span><span class="op">)</span>,</span>
+<span>    rt_q10 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">implied_rt</span>, <span class="fl">0.1</span><span class="op">)</span>,</span>
+<span>    rt_q90 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">implied_rt</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
+<span>    growth_q10 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">growth_rate</span>, <span class="fl">0.1</span><span class="op">)</span>,</span>
+<span>    growth_q90 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">growth_rate</span>, <span class="fl">0.9</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">growth_uncertainty</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 5</span></span></span>
+<span><span class="co">#&gt;   rt_median rt_q10 rt_q90 growth_q10 growth_q90</span></span>
+<span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>      1.67   1.48   1.88     0.084<span style="text-decoration: underline;">1</span>      0.134</span></span></code></pre></div>
+<p>The draw object <code>growth$uncertainty_draws</code> is reusable in
+downstream forecasting and sensitivity analyses.</p>
+</div>
+<div class="section level2">
+<h2 id="stage-2-renewal-forecast-with-uncertainty-propagation">Stage 2: renewal forecast with uncertainty propagation<a class="anchor" aria-label="anchor" href="#stage-2-renewal-forecast-with-uncertainty-propagation"></a>
+</h2>
+<p>Given serial interval weights
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mi>s</mi></msub><annotation encoding="application/x-tex">w_s</annotation></semantics></math>,
+renewal forecasts use</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mrow><mo stretchy="true" form="prefix">[</mo><msub><mi>I</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><msub><mi>R</mi><mi>t</mi></msub><munderover><mo>∑</mo><mrow><mi>s</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></munderover><msub><mi>I</mi><mrow><mi>t</mi><mo>−</mo><mi>s</mi></mrow></msub><msub><mi>w</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">
+E[I_t] = R_t \sum_{s=1}^{t-1} I_{t-s} w_s
+</annotation></semantics></math></p>
+<p>and then sample future counts from a Poisson process. We propagate
+uncertainty by using <strong>draw-specific</strong> <code>R_t</code>
+trajectories.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">serial_interval</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.25</span>, <span class="fl">0.15</span><span class="op">)</span></span>
+<span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fl">7</span></span>
+<span></span>
+<span><span class="co"># Map growth-rate uncertainty into Rt paths (constant within horizon per draw)</span></span>
+<span><span class="va">rt_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span></span>
+<span>  <span class="va">growth</span><span class="op">$</span><span class="va">uncertainty_draws</span><span class="op">$</span><span class="va">implied_rt</span>,</span>
+<span>  nrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">growth</span><span class="op">$</span><span class="va">uncertainty_draws</span><span class="op">)</span>,</span>
+<span>  ncol <span class="op">=</span> <span class="va">h</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">forecast_draws</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simulate_renewal_forecast.html">simulate_renewal_forecast</a></span><span class="op">(</span></span>
+<span>  incidence <span class="op">=</span> <span class="va">inc</span><span class="op">$</span><span class="va">incidence</span>,</span>
+<span>  serial_interval <span class="op">=</span> <span class="va">serial_interval</span>,</span>
+<span>  rt <span class="op">=</span> <span class="va">rt_matrix</span>,</span>
+<span>  horizon <span class="op">=</span> <span class="va">h</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fl">100</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">forecast_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/summarise_forecast_uncertainty.html">summarise_forecast_uncertainty</a></span><span class="op">(</span></span>
+<span>  <span class="va">forecast_draws</span>,</span>
+<span>  probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
+<span>  interval_level <span class="op">=</span> <span class="fl">0.9</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">forecast_summary</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 10</span></span></span>
+<span><span class="co">#&gt;     day  mean median    sd lower upper interval_level q10.0000 q50.0000 q90.0000</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1  11.8     12  3.58  6       18            0.9        7       12       16</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2  13.2     13  3.87  7       20            0.9        8       13       18</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3  16.6     16  4.79  9.35    25            0.9       11       16       23</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4  19.7     19  5.95 11       30            0.9       12       19       27</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     5  23.5     23  7.92 12       38            0.9       14       23       34</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     6  27.4     26  9.69 14       45            0.9       16       26       41</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>     7  32.9     31 12.4  16       57            0.9       19       31       49</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">last_date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">inc</span><span class="op">$</span><span class="va">date</span><span class="op">)</span></span>
+<span><span class="va">plot_df</span> <span class="op">&lt;-</span> <span class="va">forecast_summary</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>date <span class="op">=</span> <span class="va">last_date</span> <span class="op">+</span> <span class="va">day</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">plot_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">median</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html" class="external-link">geom_ribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">lower</span>, ymax <span class="op">=</span> <span class="va">upper</span><span class="op">)</span>, fill <span class="op">=</span> <span class="st">"#9ecae1"</span>, alpha <span class="op">=</span> <span class="fl">0.45</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"#08519c"</span>, linewidth <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"7-day predictive distribution from renewal simulation"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"Median and 90% interval with parameter + process uncertainty"</span>,</span>
+<span>    x <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Forecast incidence"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
+<p><img src="cat-ba-week1-analysis_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="" width="672"></p>
+<div class="section level3">
+<h3 id="interpreting-predictive-uncertainty">Interpreting predictive uncertainty<a class="anchor" aria-label="anchor" href="#interpreting-predictive-uncertainty"></a>
+</h3>
+<p>A practical interpretation pattern:</p>
+<ul>
+<li>
+<strong>Median</strong>: central forecast trajectory.</li>
+<li>
+<strong>90% interval</strong>: expected range under model
+assumptions.</li>
+<li>
+<strong>Interval width growth over horizon</strong>: uncertainty
+accumulation from recursive simulation.</li>
+</ul>
+<p>To isolate uncertainty sources, compare a fixed-<code>R_t</code> run
+against uncertain <code>R_t</code> draws.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fixed_rt_draws</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simulate_renewal_forecast.html">simulate_renewal_forecast</a></span><span class="op">(</span></span>
+<span>  incidence <span class="op">=</span> <span class="va">inc</span><span class="op">$</span><span class="va">incidence</span>,</span>
+<span>  serial_interval <span class="op">=</span> <span class="va">serial_interval</span>,</span>
+<span>  rt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">growth</span><span class="op">$</span><span class="va">uncertainty_draws</span><span class="op">$</span><span class="va">implied_rt</span><span class="op">)</span>,</span>
+<span>  horizon <span class="op">=</span> <span class="va">h</span>,</span>
+<span>  n_sims <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fl">101</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">width_compare</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/summarise_forecast_uncertainty.html">summarise_forecast_uncertainty</a></span><span class="op">(</span><span class="va">fixed_rt_draws</span>, interval_level <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html" class="external-link">transmute</a></span><span class="op">(</span><span class="va">day</span>, width <span class="op">=</span> <span class="va">upper</span> <span class="op">-</span> <span class="va">lower</span>, source <span class="op">=</span> <span class="st">"process only (fixed Rt)"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="../reference/summarise_forecast_uncertainty.html">summarise_forecast_uncertainty</a></span><span class="op">(</span><span class="va">forecast_draws</span>, interval_level <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html" class="external-link">transmute</a></span><span class="op">(</span><span class="va">day</span>, width <span class="op">=</span> <span class="va">upper</span> <span class="op">-</span> <span class="va">lower</span>, source <span class="op">=</span> <span class="st">"process + Rt uncertainty"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">width_compare</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 14 × 3</span></span></span>
+<span><span class="co">#&gt;      day width source                  </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1  11   process only (fixed Rt) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2  12   process only (fixed Rt) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     3  14   process only (fixed Rt) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     4  16   process only (fixed Rt) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     5  21   process only (fixed Rt) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     6  23   process only (fixed Rt) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     7  28   process only (fixed Rt) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     1  12   process + Rt uncertainty</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     2  13   process + Rt uncertainty</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     3  15.7 process + Rt uncertainty</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>     4  19   process + Rt uncertainty</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>     5  26   process + Rt uncertainty</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>     6  31   process + Rt uncertainty</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>     7  41   process + Rt uncertainty</span></span></code></pre></div>
+<p>In this decomposition, wider intervals under stochastic
+<code>R_t</code> indicate meaningful parameter-driven uncertainty beyond
+intrinsic count noise.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="stage-3-rolling-origin-backtesting-and-scoring">Stage 3: rolling-origin backtesting and scoring<a class="anchor" aria-label="anchor" href="#stage-3-rolling-origin-backtesting-and-scoring"></a>
+</h2>
+<p>Rolling-origin evaluation repeatedly trains on prefixes of the time
+series and scores forecasts against unseen future observations.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">backtest</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rolling_origin_evaluate.html">rolling_origin_evaluate</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">inc</span>,</span>
+<span>  initial_window <span class="op">=</span> <span class="fl">14</span>,</span>
+<span>  horizon <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  step <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  serial_interval <span class="op">=</span> <span class="va">serial_interval</span>,</span>
+<span>  rt_method <span class="op">=</span> <span class="st">"growth"</span>,</span>
+<span>  n_sims <span class="op">=</span> <span class="fl">400</span>,</span>
+<span>  interval_level <span class="op">=</span> <span class="fl">0.9</span>,</span>
+<span>  wis_levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span><span class="op">)</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fl">2026</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">backtest</span><span class="op">$</span><span class="va">overall</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span></span>
+<span><span class="co">#&gt;     mae  rmse coverage   wis  crps n_origins n_forecasts</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  1.78  2.33        1  1.02  1.34         5          25</span></span></code></pre></div>
+<p><code>backtest$overall</code> provides global summaries across all
+origins and horizons:</p>
+<ul>
+<li>
+<strong>MAE</strong>: mean absolute point error,</li>
+<li>
+<strong>RMSE</strong>: root mean squared point error,</li>
+<li>
+<strong>coverage</strong>: empirical 90% interval coverage,</li>
+<li>
+<strong>WIS</strong>: weighted interval score (sharpness +
+calibration penalties),</li>
+<li>
+<strong>CRPS</strong>: proper score for full predictive
+distributions.</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">backtest</span><span class="op">$</span><span class="va">origin_summary</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 7</span></span></span>
+<span><span class="co">#&gt;   origin_index origin_date   mae  rmse coverage   wis  crps</span></span>
+<span><span class="co">#&gt;          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>           14 2024-01-14    0.8  1.41        1 0.710 0.916</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>           15 2024-01-15    1.7  2.54        1 0.932 1.23 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>           16 2024-01-16    1.8  2.32        1 1.05  1.35 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>           17 2024-01-17    2    2.37        1 1.09  1.47 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>           18 2024-01-18    2.6  2.79        1 1.31  1.74</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">backtest</span><span class="op">$</span><span class="va">scores</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">target_date</span>, <span class="va">wis</span>, group <span class="op">=</span> <span class="va">origin_index</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">origin_index</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Rolling-origin WIS by target date"</span>,</span>
+<span>    x <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"WIS"</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"Origin"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
+<p><img src="cat-ba-week1-analysis_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="" width="672"></p>
+</div>
+<div class="section level2">
+<h2 id="chain-based-uncertainty-simulation-with-epichains">Chain-based uncertainty simulation with epichains<a class="anchor" aria-label="anchor" href="#chain-based-uncertainty-simulation-with-epichains"></a>
+</h2>
+<p><code>omia</code> includes <code><a href="../reference/simulate_epichains_forecast.html">simulate_epichains_forecast()</a></code>
+as a branching-process alternative. Here we compare renewal vs epichains
+forecasts for the same training origin and scalar <code>R_t</code>
+estimate.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># One explicit holdout split for method comparison</span></span>
+<span><span class="va">train_n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">inc</span><span class="op">)</span> <span class="op">-</span> <span class="fl">7</span></span>
+<span><span class="va">train</span> <span class="op">&lt;-</span> <span class="va">inc</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">train_n</span>, <span class="op">]</span></span>
+<span><span class="va">truth</span> <span class="op">&lt;-</span> <span class="va">inc</span><span class="op">$</span><span class="va">incidence</span><span class="op">[</span><span class="op">(</span><span class="va">train_n</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">inc</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">fit_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_poisson_growth.html">fit_poisson_growth</a></span><span class="op">(</span><span class="va">train</span>, n_draws <span class="op">=</span> <span class="fl">500</span>, seed <span class="op">=</span> <span class="fl">44</span><span class="op">)</span></span>
+<span><span class="va">rt_hat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">fit_train</span><span class="op">$</span><span class="va">uncertainty_draws</span><span class="op">$</span><span class="va">implied_rt</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">renewal_cmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simulate_renewal_forecast.html">simulate_renewal_forecast</a></span><span class="op">(</span></span>
+<span>  incidence <span class="op">=</span> <span class="va">train</span><span class="op">$</span><span class="va">incidence</span>,</span>
+<span>  serial_interval <span class="op">=</span> <span class="va">serial_interval</span>,</span>
+<span>  rt <span class="op">=</span> <span class="va">rt_hat</span>,</span>
+<span>  horizon <span class="op">=</span> <span class="fl">7</span>,</span>
+<span>  n_sims <span class="op">=</span> <span class="fl">600</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fl">77</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">epichains_cmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simulate_epichains_forecast.html">simulate_epichains_forecast</a></span><span class="op">(</span></span>
+<span>  initial_cases <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">train</span><span class="op">$</span><span class="va">incidence</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  rt <span class="op">=</span> <span class="va">rt_hat</span>,</span>
+<span>  serial_interval <span class="op">=</span> <span class="va">serial_interval</span>,</span>
+<span>  horizon <span class="op">=</span> <span class="fl">7</span>,</span>
+<span>  n_sims <span class="op">=</span> <span class="fl">600</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fl">77</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">score_compare</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/score_forecast_draws.html">score_forecast_draws</a></span><span class="op">(</span><span class="va">truth</span>, <span class="va">renewal_cmp</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"renewal_poisson"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="../reference/score_forecast_draws.html">score_forecast_draws</a></span><span class="op">(</span><span class="va">truth</span>, <span class="va">epichains_cmp</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"epichains_branching"</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
+<span>    mae <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">mae</span><span class="op">)</span>,</span>
+<span>    rmse <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">sq_error</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    coverage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">covered</span><span class="op">)</span>,</span>
+<span>    wis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">wis</span><span class="op">)</span>,</span>
+<span>    crps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">crps</span><span class="op">)</span>,</span>
 <span>    .groups <span class="op">=</span> <span class="st">"drop"</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">sim_summary</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
-<span><span class="co">#&gt;     day mean_sim   q05   q95</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     0        0     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2     0.14     0     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3     0.26     0     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4     0.47     0     2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     5     0.99     0     3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     6     1.42     0     4</span></span></code></pre></div>
+<span><span class="va">score_compare</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 6</span></span></span>
+<span><span class="co">#&gt;   method                mae  rmse coverage   wis  crps</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> epichains_branching  5     5.54    0.286  3.25  3.86</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> renewal_poisson      2.14  2.59    1      1.10  1.40</span></span></code></pre></div>
+<p>This side-by-side comparison is useful when teaching how different
+stochastic assumptions (renewal-Poisson vs explicit transmission chains)
+change predictive sharpness and calibration.</p>
 </div>
 <div class="section level2">
-<h2 id="model-comparison">Model comparison<a class="anchor" aria-label="anchor" href="#model-comparison"></a>
+<h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
-<p>A simple practical comparison is between:</p>
-<ul>
-<li>
-<strong>growth model</strong>: <code>incidence ~ day</code>
-(Poisson)</li>
-<li>
-<strong>null model</strong>: <code>incidence ~ 1</code>
-(Poisson)</li>
-</ul>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model_df</span> <span class="op">&lt;-</span> <span class="va">inc</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>day <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">date</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="va">m_growth</span> <span class="op">&lt;-</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">day</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">poisson</a></span><span class="op">(</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">model_df</span><span class="op">)</span></span>
-<span><span class="va">m_null</span> <span class="op">&lt;-</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">poisson</a></span><span class="op">(</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">model_df</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="../reference/compare_incidence_models.html">compare_incidence_models</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>growth <span class="op">=</span> <span class="va">m_growth</span>, null <span class="op">=</span> <span class="va">m_null</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 5</span></span></span>
-<span><span class="co">#&gt;   model    aic   bic looic looic_note   </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> growth  89.2  91.5    <span style="color: #BB0000;">NA</span> not requested</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> null   123.  124.     <span style="color: #BB0000;">NA</span> not requested</span></span></code></pre></div>
-<p>In this dataset, the growth model should typically outperform the
-null model on AIC/BIC, supporting a non-stationary incidence
-process.</p>
-</div>
-<div class="section level2">
-<h2 id="consensus-summary">Consensus summary<a class="anchor" aria-label="anchor" href="#consensus-summary"></a>
-</h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">summary_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/outbreak_consensus_summary.html">outbreak_consensus_summary</a></span><span class="op">(</span></span>
-<span>  incidence_data <span class="op">=</span> <span class="va">inc</span>,</span>
-<span>  rt_estimates <span class="op">=</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  growth_fit <span class="op">=</span> <span class="va">growth</span>,</span>
-<span>  model_comparison <span class="op">=</span> <span class="fu"><a href="../reference/compare_incidence_models.html">compare_incidence_models</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>growth <span class="op">=</span> <span class="va">m_growth</span>, null <span class="op">=</span> <span class="va">m_null</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">summary_tbl</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
-<span><span class="co">#&gt;   start_date end_date   days_observed total_incidence peak_date  peak_incidence</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2024-01-01 2024-01-23            23              79 2024-01-23             12</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 5 more variables: latest_rt &lt;dbl&gt;, growth_rate &lt;dbl&gt;, doubling_time &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   trend &lt;chr&gt;, best_model &lt;chr&gt;</span></span></span></code></pre></div>
-<p>This summary is designed as a compact handoff table for
-reports/dashboards.</p>
-</div>
-<div class="section level2">
-<h2 id="optional-rt-estimation-with-epiestim">Optional Rt estimation with EpiEstim<a class="anchor" aria-label="anchor" href="#optional-rt-estimation-with-epiestim"></a>
-</h2>
-<p>If <code>EpiEstim</code> is installed, integrate time-varying Rt
-directly:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_rt_epiestim.html">estimate_rt_epiestim</a></span><span class="op">(</span><span class="va">inc</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/plot_rt_estimates.html">plot_rt_estimates</a></span><span class="op">(</span><span class="va">rt</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="rationale-and-limitations">Rationale and limitations<a class="anchor" aria-label="anchor" href="#rationale-and-limitations"></a>
-</h2>
-<div class="section level3">
-<h3 id="why-combine-methods">Why combine methods?<a class="anchor" aria-label="anchor" href="#why-combine-methods"></a>
-</h3>
-<ul>
-<li>Growth models estimate <em>trend intensity</em> and doubling/halving
-dynamics.</li>
-<li>Renewal calculations encode transmission structure via serial
-intervals.</li>
-<li>Rt estimation (optional) provides transmissibility over time.</li>
-<li>Model comparison quantifies relative explanatory fit.</li>
-</ul>
-<p>No single estimator is sufficient in isolation; agreement across
-views improves interpretability.</p>
-</div>
-<div class="section level3">
-<h3 id="key-limitations">Key limitations<a class="anchor" aria-label="anchor" href="#key-limitations"></a>
-</h3>
-<ul>
-<li>The included dataset is short and intended for demonstration.</li>
-<li>Poisson assumptions may understate overdispersion for real
-outbreaks.</li>
-<li>Renewal output depends on serial interval specification.</li>
-<li>Rt estimates are method/config-sensitive and should be
-sensitivity-tested.</li>
-</ul>
-<p>For production surveillance, pair this workflow with data quality
-checks, multiple model families (e.g., NB/hierarchical variants), and
-explicit sensitivity analyses.</p>
-</div>
+<p>The package now supports a complete uncertainty-aware workflow for
+count forecasting:</p>
+<ol style="list-style-type: decimal">
+<li>estimate trend parameters with uncertainty draws,</li>
+<li>propagate uncertainty through recursive renewal simulation,</li>
+<li>summarise predictive distributions,</li>
+<li>evaluate forecasts with rolling-origin backtesting,</li>
+<li>report proper scoring rules (WIS, CRPS) alongside
+MAE/RMSE/coverage,</li>
+<li>compare against chain-based simulation via
+<code>epichains</code>.</li>
+</ol>
+<p>These components are designed for reproducible advanced teaching and
+practical forecast model assessment in count time-series settings.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
