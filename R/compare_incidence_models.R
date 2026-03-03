@@ -32,10 +32,15 @@ compare_incidence_models <- function(models, include_looic = FALSE) {
     }
 
     if (has_loo) {
-      ll_mat <- tryCatch(
-        loo::log_lik(mod),
-        error = function(e) NULL
-      )
+      ll_mat <- tryCatch({
+        if (is.matrix(mod$log_lik)) {
+          mod$log_lik
+        } else if (is.function(mod$log_lik)) {
+          mod$log_lik()
+        } else {
+          NULL
+        }
+      }, error = function(e) NULL)
 
       if (!is.null(ll_mat)) {
         loo_obj <- tryCatch(loo::loo(ll_mat), error = function(e) NULL)
@@ -46,7 +51,7 @@ compare_incidence_models <- function(models, include_looic = FALSE) {
           loo_note <- "loo computation failed"
         }
       } else {
-        loo_note <- "log_lik unavailable for model"
+        loo_note <- "pointwise log-likelihood unavailable for model"
       }
     }
 
