@@ -3,7 +3,7 @@ pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   cat-ba-week1-analysis: cat-ba-week1-analysis.html
-last_built: 2026-03-03T11:28Z
+last_built: 2026-03-03T11:34Z
 urls:
   reference: https://example.org/omia/reference
   article: https://example.org/omia/articles
